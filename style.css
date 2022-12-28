@@ -1,0 +1,10 @@
+body {
+    display: flex;
+}
+.box {
+    background: #5656;
+    width: 50%;
+    height: 200px;
+    display: flex;
+    border: 10px red dotted;
+}
