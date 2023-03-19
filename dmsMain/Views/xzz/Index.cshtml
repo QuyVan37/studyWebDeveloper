@@ -1,0 +1,119 @@
+﻿@model IEnumerable<DMS3.Models.User>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MRRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TroubleRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PORole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TranferDieRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DieLaunchRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isAdmin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isLock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isNew)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserGradeCatergory.GradeName)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TroubleRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PORole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TranferDieRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DieLaunchRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isAdmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isLock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserGradeCatergory.GradeName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
