@@ -1,0 +1,249 @@
+﻿@model IEnumerable<DMS3.Models.User>
+
+@{
+    ViewBag.Title = "UserAdminControl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3> USERS</h3>
+<div class="card">
+    <div class="card-header">
+        DMS User
+    </div>
+    <div class="card-body table-contain">
+        <table class="table text-nowrap">
+            <tr>
+                <th>Admin</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.BuyerCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isAdmin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isLock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isNewRQ)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastOnlineDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department.DeptName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserGradeCatergory.GradeName)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <button onclick="showUserDetail(@item.UserID)" class="btn btn-primary btn-sm"> <i class="fa-solid fa-user-pen"></i></button>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isAdmin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isLock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isNewRQ)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastOnlineDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.DeptName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserGradeCatergory.GradeName)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+<!-- Modal Admin verify Users-->
+<div class="modal fade" id="modal_Admin_verify_user" tabindex="-1" role="dialog">
+    <div class="modal-dialog  modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">User information</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input id="userID" hidden />
+                        <input type="text" class="form-control form-control-sm" id="name">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="code" class="form-label">Code</label>
+                        <input type="text" class="form-control form-control-sm" id="code">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="code" class="form-label">Email</label>
+                        <input type="text" class="form-control form-control-sm" id="email">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="code" class="form-label">Grade</label>
+                        @Html.DropDownList("GradeID", null, "", htmlAttributes: new { @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="code" class="form-label">Department</label>
+                        @Html.DropDownList("DeptID", null, "", htmlAttributes: new { @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="isAdmin" class="form-label">Is Admin</label>
+                        <select id="isAdmin" class="form-control form-control-sm">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="isLock" class="form-label">Is Lock</label>
+                        <select id="isLock" class="form-control form-control-sm">
+
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="isNewRQ" class="form-label">Is New RQ</label>
+                        <select id="isNewRQ" Disabled class="form-control form-control-sm">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                </div>
+                <hr />
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        <label for="" class="form-label">MR Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "MRRoleID", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">RQ Change MR Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "RQChangeMRroleID", @Disabled = "Disabled", @class = "form-control form-control-sm" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="" class="form-label">PO Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "PORoleID", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">RQ Change MR Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "RQChangePOroleID", @Disabled = "Disabled", @class = "form-control form-control-sm" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="" class="form-label">TPI Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "TroubleRoleID", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">RQ Change TPI Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "RQChangeTroubleRoleID", @Disabled = "Disabled", @class = "form-control form-control-sm" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="" class="form-label">DSUM Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "DSUMRoleID", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">RQ Change DSUM Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "RQChangeDSUMRoleID", @Disabled = "Disabled", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">Die Launch Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "DieLaunchRoleID", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">RQ Change D.Lch Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "RQChangeDieLaunchRoleID", @Disabled = "Disabled", @class = "form-control form-control-sm" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="" class="form-label">Die Transfer Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "TransferDieRoleID", @class = "form-control form-control-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">RQ Change Transfer Role</label>
+                        @Html.DropDownList("DMSroleID", null, "", htmlAttributes: new { @id = "RQChangeTransferDieRoleID", @Disabled = "Disabled", @class = "form-control form-control-sm" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="text" id="reasonRefuse" class="form-control" placeholder="Reason refuse..." />
+                <button type="button" value="refuse" class="btn_user_action btn btn-outline-danger">Refuse</button>
+                <button type="button" value="save" class="btn_user_action btn btn-primary">Save</button>
+                <button type="button" value="verify" class="btn_user_action btn btn-warning" title="accepted user and send email anouncement">Verified</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/Admin/Admin.js"></script>
+}
